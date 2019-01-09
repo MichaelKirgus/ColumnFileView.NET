@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ColumnFileViewCli</RootNamespace>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <ApplicationIcon>columnfileviewcli.ico</ApplicationIcon>
+    <StartupObject>Sub Main</StartupObject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\netcoreapp2.2\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ColumnFileViewCliHelper\ColumnFileViewCliHelper.vbproj" />
+  </ItemGroup>
+
+</Project>
