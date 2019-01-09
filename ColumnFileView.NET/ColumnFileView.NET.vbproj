@@ -234,7 +234,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Lizenzbedingungen.rtf" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -304,7 +303,6 @@
     <None Include="Resources\view-file-columns.png" />
     <None Include="Resources\view-file-columns1.png" />
     <Content Include="columnfileviewnet.ico" />
-    <Content Include="Lizenzbedingungen.txt" />
     <None Include="Resources\zoom-fit-width.png" />
     <None Include="Resources\lock_col_resize.png" />
     <None Include="Resources\auto_resize_column.png" />
