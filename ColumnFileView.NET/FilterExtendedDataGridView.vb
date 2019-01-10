@@ -11,12 +11,15 @@ Public Class FilterExtendedDataGridView
 
     Public Property DoubleBufferOverride As Boolean = False
 
+    'Controls for AutoColumnClass
     Dim statusStrip1 As New StatusStrip()
     Dim filterStatusLabel As New ToolStripStatusLabel()
     Dim WithEvents showAllLabel As New ToolStripStatusLabel("Show &All")
 
 
     Private Sub DataGridViewCtl_BindingContextChanged(sender As Object, e As EventArgs) Handles DataGridViewCtl.BindingContextChanged
+        'If the binding has changed, the auto-filter cells will be added.
+
         CheckForBindingAndPopulateCache()
     End Sub
 
@@ -56,7 +59,7 @@ Public Class FilterExtendedDataGridView
     End Sub
 
     Public Sub AddFilterControls()
-        'Erstelle Filter
+        'Populated filter controls.
         FilterPanel.Controls.Clear()
 
 
@@ -93,6 +96,8 @@ Public Class FilterExtendedDataGridView
     End Sub
 
     Public Function GetColumnsControlsCount() As Integer
+        'Gets the count of additional user-defined column controls without the dummy control.
+
         Dim cnt As Integer = 0
         For ind = 0 To FilterPanel.Controls.Count - 1
             Try
@@ -108,7 +113,7 @@ Public Class FilterExtendedDataGridView
     End Function
 
     Public Sub UpdateFilterControls()
-        'Aktualisiere Elemente
+        'Update controls in additional user-defined column controls.
         If Not FilterPanel.Controls.Count = 0 Then
             Dim startindex = 0
             If DataGridViewCtl.RowHeadersVisible Then
@@ -148,6 +153,8 @@ Public Class FilterExtendedDataGridView
     End Sub
 
     Private Sub DataGridViewCtl_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles DataGridViewCtl.DataBindingComplete
+        'This allows the change of the controls visibility and also get the filter-style of an column.
+
         If _parent._ProfileDefinition.UseExtendedFilter Then
             Dim filterStatus As String = DataGridViewAutoFilterColumnHeaderCell _
                         .GetFilterStatus(DataGridViewCtl)
@@ -168,6 +175,8 @@ Public Class FilterExtendedDataGridView
     End Sub
 
     Private Sub FilterExtendedDataGridView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Set the basic states of the filter controls.
+
         With showAllLabel
             .Visible = False
             .IsLink = True
@@ -180,6 +189,7 @@ Public Class FilterExtendedDataGridView
                 filterStatusLabel, showAllLabel})
         End With
 
+        'This allows us to use the DoubeBuffered Value also at the DataGridView...
         If DoubleBufferOverride Then
             If Not SystemInformation.TerminalServerSession Then
                 Dim dgvType As Type = DataGridViewCtl.[GetType]()
@@ -190,16 +200,23 @@ Public Class FilterExtendedDataGridView
     End Sub
 
     Private Sub DataGridViewCtl_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles DataGridViewCtl.DataError
+        'Do not throw any errors
+
         e.ThrowException = False
     End Sub
 
     Private Sub showAllLabel_Click(ByVal sender As Object,
     ByVal e As EventArgs) Handles showAllLabel.Click
+        'Removes the filter if the user clicks on the label.
 
         DataGridViewAutoFilterColumnHeaderCell.RemoveFilter(DataGridViewCtl)
     End Sub
 
     Private Sub DataGridViewCtl_ColumnWidthChanged(sender As Object, e As DataGridViewColumnEventArgs) Handles DataGridViewCtl.ColumnWidthChanged
+        'Update the controls in additional user-defined column controls if there is an change.
+        'It also checks if the column count is equal to the count of the controls.
+        'If necessary, it re-adds the controls.
+
         If Not GetColumnsControlsCount() = DataGridViewCtl.Columns.Count Then
             AddFilterControls()
         Else
@@ -212,6 +229,8 @@ Public Class FilterExtendedDataGridView
     End Sub
 
     Private Sub DataGridViewCtl_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridViewCtl.KeyDown
+        'Handle KeyDown-Events
+
         If e.Alt AndAlso (e.KeyCode = Keys.Down OrElse e.KeyCode = Keys.Up) Then
             Dim filterCell As DataGridViewAutoFilterColumnHeaderCell =
                 TryCast(DataGridViewCtl.CurrentCell.OwningColumn.HeaderCell,
@@ -224,6 +243,8 @@ Public Class FilterExtendedDataGridView
     End Sub
 
     Public Function SaveDefinitionFileChanges(ByVal Filename As String) As Boolean
+        'Helper function to save the current profile definition class to a file.
+
         Try
             Dim pp As New FileSerializer
             pp.SaveDefFile(Filename, _ProfileDefinition)
@@ -235,6 +256,8 @@ Public Class FilterExtendedDataGridView
     End Function
 
     Public Function LoadDefinitionFileChanges(ByVal Filename As String) As FileHandler
+        'Helper function to load a new profile definition file in the current profile definition class.
+
         Try
             Dim pp As New FileSerializer
             Dim jj As FileHandler
@@ -265,6 +288,8 @@ Public Class FilterExtendedDataGridView
     End Sub
 
     Private Sub DataGridViewCtl_ColumnStateChanged(sender As Object, e As DataGridViewColumnStateChangedEventArgs) Handles DataGridViewCtl.ColumnStateChanged
+        'If a column was not visible, re-create the additional user-defined column controls.
+
         If e.StateChanged = DataGridViewElementStates.Visible Then
             AddFilterControls()
         End If
