@@ -590,6 +590,7 @@ Public Class DataGridViewAutoFilterColumnHeaderCell
         ' Populate the filters dictionary, then copy the filter values 
         ' from the filters.Keys collection into the ListBox.Items collection, 
         ' selecting the current filter if there is one in effect. 
+
         PopulateFilters()
 
         Dim filterArray As String() = New String(filters.Count - 1) {}
@@ -811,7 +812,6 @@ Public Class DataGridViewAutoFilterColumnHeaderCell
 
         UpdateFilter()
         HideDropDownList()
-
     End Sub
 
     ''' <summary>
@@ -884,10 +884,14 @@ Public Class DataGridViewAutoFilterColumnHeaderCell
     End Sub 'PopulateFilters
 
     Private Sub PopulateFilters_Complete() Handles PopulateFilterThread.RunWorkerCompleted
+        'Set the filter value, because all filter values are populated
+
         FilterPopulated = True
     End Sub
 
     Private Sub PopulateFilters_DoWork() Handles PopulateFilterThread.DoWork
+        'This thread fills the filter-array with unique values.
+
         ' Continue only if there is a DataGridView.
         If Me.DataGridView Is Nothing Then
             Return
