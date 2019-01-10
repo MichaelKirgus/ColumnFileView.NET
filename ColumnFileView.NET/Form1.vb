@@ -256,7 +256,7 @@ Public Class Form1
                     DestDatagridViewCtl.Columns(index).AutoSizeMode = Profile.ColumnDefinitions(index).AutoSizeColumnContent
                     DestDatagridViewCtl.Columns(index).Visible = Profile.ColumnDefinitions(index).Visible
                     If _Settings.AlwaysUseColumnsSortFeature Then
-                        DestDatagridViewCtl.Columns(index).SortMode = DataGridViewColumnSortMode.Automatic
+                        DestDatagridViewCtl.Columns(index).SortMode = DataGridViewColumnSortMode.Programmatic
                     Else
                         DestDatagridViewCtl.Columns(index).SortMode = Profile.ColumnDefinitions(index).SortingMode
                     End If

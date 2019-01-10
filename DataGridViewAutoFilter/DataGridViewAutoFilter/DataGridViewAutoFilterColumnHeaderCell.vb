@@ -6,6 +6,7 @@
 'IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
 'PARTICULAR PURPOSE.
 '---------------------------------------------------------------------
+'Code edited by Michael Kirgus
 
 Imports DataGridViewAutoFilter
 Imports System
@@ -395,8 +396,13 @@ Public Class DataGridViewAutoFilterColumnHeaderCell
         ' filter list is showing and whether there is a filter in effect 
         ' for the current column. 
         If Application.RenderWithVisualStyles Then
-            Dim state As ComboBoxState = ComboBoxState.Normal
-
+            'Disable Button if the filter was not populated.
+            Dim state As ComboBoxState
+            If FilterPopulated = False Then
+                state = ComboBoxState.Disabled
+            Else
+                state = ComboBoxState.Normal
+            End If
             If dropDownListBoxShowing Then
                 state = ComboBoxState.Pressed
             ElseIf filtered Then
@@ -409,6 +415,11 @@ Public Class DataGridViewAutoFilterColumnHeaderCell
             ' correctly and to offset the down arrow. 
             Dim pressedOffset As Int32 = 0
             Dim state As PushButtonState = PushButtonState.Normal
+
+            'Disable Button if the filter was not populated.
+            If FilterPopulated = False Then
+                state = PushButtonState.Disabled
+            End If
             If dropDownListBoxShowing Then
                 state = PushButtonState.Pressed
                 pressedOffset = 1
@@ -593,28 +604,30 @@ Public Class DataGridViewAutoFilterColumnHeaderCell
 
         PopulateFilters()
 
-        Dim filterArray As String() = New String(filters.Count - 1) {}
-        filters.Keys.CopyTo(filterArray, 0)
-        dropDownListBox.Items.Clear()
-        dropDownListBox.Items.AddRange(filterArray)
-        dropDownListBox.SelectedItem = selectedFilterValue
+        If FilterPopulated Then
+            Dim filterArray As String() = New String(filters.Count - 1) {}
+            filters.Keys.CopyTo(filterArray, 0)
+            dropDownListBox.Items.Clear()
+            dropDownListBox.Items.AddRange(filterArray)
+            dropDownListBox.SelectedItem = selectedFilterValue
 
-        ' Add handlers to dropDownListBox events. 
-        HandleDropDownListBoxEvents()
+            ' Add handlers to dropDownListBox events. 
+            HandleDropDownListBoxEvents()
 
-        ' Set the size and location of dropDownListBox, then display it. 
-        SetDropDownListBoxBounds()
-        dropDownListBox.Visible = True
-        dropDownListBoxShowing = True
+            ' Set the size and location of dropDownListBox, then display it. 
+            SetDropDownListBoxBounds()
+            dropDownListBox.Visible = True
+            dropDownListBoxShowing = True
 
-        Debug.Assert(dropDownListBox.Parent Is Nothing,
-            "ShowDropDownListBox has been called multiple times before HideDropDownListBox")
+            Debug.Assert(dropDownListBox.Parent Is Nothing,
+                "ShowDropDownListBox has been called multiple times before HideDropDownListBox")
 
-        ' Add dropDownListBox to the DataGridView. 
-        Me.DataGridView.Controls.Add(dropDownListBox)
+            ' Add dropDownListBox to the DataGridView. 
+            Me.DataGridView.Controls.Add(dropDownListBox)
 
-        ' Set the input focus to dropDownListBox. 
-        dropDownListBox.Focus()
+            ' Set the input focus to dropDownListBox. 
+            dropDownListBox.Focus()
+        End If
 
         ' Invalidate the cell so that the drop-down button will repaint
         ' in the pressed state. 
@@ -887,6 +900,12 @@ Public Class DataGridViewAutoFilterColumnHeaderCell
         'Set the filter value, because all filter values are populated
 
         FilterPopulated = True
+
+        ' Invalidate the cell so that the drop-down button will repaint
+        ' in the enabled state.
+        If Not IsNothing(Me.DataGridView) Then
+            Me.DataGridView.InvalidateCell(Me)
+        End If
     End Sub
 
     Private Sub PopulateFilters_DoWork() Handles PopulateFilterThread.DoWork
