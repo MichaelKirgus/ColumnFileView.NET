@@ -1,4 +1,8 @@
-﻿Public Class FileSizeCalcHandler
+﻿'Copyright (C) 2018-2019 Michael Kirgus
+'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
+Public Class FileSizeCalcHandler
     Public Function GetRightSizeFormat(ByVal size_bytes As Int64, Optional ByVal DecimalPlaces As Integer = 2, Optional ByVal KBSize As Integer = 1024) As String
         'Diese Funktion generiert aus einer Anzahl von Bytes eine lesbare Größenangabe in Bytes/KB/MB/GB/TB
 
