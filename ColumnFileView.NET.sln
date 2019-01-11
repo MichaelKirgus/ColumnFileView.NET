@@ -40,10 +40,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{C3C0A280-2CBD-43BF-BB01-6B2BDF250B6F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Alpha builds", "Alpha builds", "{FC76EFA6-9601-4373-AB09-A4E1ADE00B36}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -321,10 +317,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C3C0A280-2CBD-43BF-BB01-6B2BDF250B6F} = {EA571F4E-46FB-4B2E-B06E-92833FD29BEC}
-		{FC76EFA6-9601-4373-AB09-A4E1ADE00B36} = {C3C0A280-2CBD-43BF-BB01-6B2BDF250B6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {138476FE-061E-4224-BA4D-E2359DE0F38A}

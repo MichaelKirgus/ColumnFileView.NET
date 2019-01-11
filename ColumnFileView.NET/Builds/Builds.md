@@ -1,0 +1,1 @@
+﻿This folder contains build beta versions that can be installed with an installer or extracted from an zip-file.

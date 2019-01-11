@@ -243,6 +243,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="Builds\Builds.md" />
+    <None Include="Builds\ColumnFileView_0_1_0_0_Portable.zip" />
     <None Include="License\GNU_v3.rtf" />
     <None Include="License\OpenIconLibrary_0.11\LICENSES" />
     <None Include="License\OpenIconLibrary_0.11\README" />
@@ -314,6 +316,7 @@
     <None Include="Resources\document-properties.png" />
     <None Include="Resources\view-file-columns.png" />
     <None Include="Resources\view-file-columns1.png" />
+    <None Include="Builds\ColumnFileView_0_1_0_0_64bit.exe" />
     <Content Include="columnfileviewnet.ico" />
     <None Include="Resources\zoom-fit-width.png" />
     <None Include="Resources\lock_col_resize.png" />
