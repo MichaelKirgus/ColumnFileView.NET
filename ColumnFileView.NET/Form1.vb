@@ -308,19 +308,25 @@ Public Class Form1
         End Try
     End Function
 
-    Public Function GetSQLWhereClause(ByVal SearchText As String, ByVal OperatorStr As String, ByVal SearchIndex As Integer) As String
+    Public Function GetSQLWhereClause(ByVal SearchText As String, ByVal OperatorStr As String, ByVal SearchIndex As Integer, Optional ByVal SkipEscapingChars As Boolean = False, Optional ByVal SkipEscapingPercentChars As Boolean = True, Optional ByVal SkipEscapingBrackets As Boolean = False) As String
         Try
             Dim pp As DataTable
             pp = BindingSource1.DataSource
 
-            'SearchText prüfen und ggf. anpassen
-            SearchText = SearchText.Replace("'", "[']")
-            SearchText = SearchText.Replace("`", "'`'")
-            SearchText = SearchText.Replace("[", "'['")
-            SearchText = SearchText.Replace("]", "']'")
-            SearchText = SearchText.Replace("%", "'%'")
-            SearchText = SearchText.Replace("*", "[*]")
-            SearchText = SearchText.Replace("\", "''")
+            'SearchText verify & escaping characters
+            If SkipEscapingChars = False Then
+                SearchText = SearchText.Replace("'", "[']")
+                SearchText = SearchText.Replace("`", "'`'")
+                If SkipEscapingBrackets = False Then
+                    SearchText = SearchText.Replace("[", "'['")
+                    SearchText = SearchText.Replace("]", "']'")
+                End If
+                If SkipEscapingChars = False Then
+                    SearchText = SearchText.Replace("%", "'%'")
+                End If
+                SearchText = SearchText.Replace("*", "[*]")
+                SearchText = SearchText.Replace("\", "''")
+            End If
 
             If SearchIndex = 0 Then
                 Dim SQL As String = ""
@@ -344,10 +350,14 @@ Public Class Form1
 
     Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
         Try
+            Dim result As Boolean = False
             If ToolStripButton7.Checked Then
-                CreateNewInstance(SearchQuery(GetSQLWhereClause(ToolStripTextBox1.Text, " = ", ToolStripComboBox1.SelectedIndex), BindingSource1.DataSource))
+                result = CreateNewInstance(SearchQuery(GetSQLWhereClause(ToolStripTextBox1.Text, " = ", ToolStripComboBox1.SelectedIndex, False, False, True), BindingSource1.DataSource))
             Else
-                CreateNewInstance(SearchQuery(GetSQLWhereClause("%" & ToolStripTextBox1.Text & "%", " LIKE ", ToolStripComboBox1.SelectedIndex), BindingSource1.DataSource))
+                result = CreateNewInstance(SearchQuery(GetSQLWhereClause("%" & ToolStripTextBox1.Text & "%", " LIKE ", ToolStripComboBox1.SelectedIndex, False, False, False), BindingSource1.DataSource))
+            End If
+            If Not result Then
+                MsgBox("Es konnte nicht nach dem Eintrag gesucht werden.")
             End If
         Catch ex As Exception
         End Try
@@ -364,22 +374,33 @@ Public Class Form1
     Public Function CreateNewInstance(ByVal DataSetX As DataRow()) As Boolean
         Try
             Dim nn As New Form1
-            nn._IsChild = True
-            nn._ProfileFile = _ProfileFile
-            nn.FilterExtendedDataGridView1._ProfileFilename = FilterExtendedDataGridView1._ProfileFilename
-            nn.LoadProfileDefinition(nn._ProfileFile)
+            Dim newdatatable As New DataTable
+            Try
+                newdatatable = DataSetX.CopyToDataTable
+            Catch ex As Exception
+            End Try
+            If Not newdatatable.Rows.Count = 0 Then
+                nn._IsChild = True
+                nn._ProfileFile = _ProfileFile
+                nn.FilterExtendedDataGridView1._ProfileFilename = FilterExtendedDataGridView1._ProfileFilename
+                nn.FilterExtendedDataGridView1._ProfileDefinition = FilterExtendedDataGridView1._ProfileDefinition
+                nn.FilterExtendedDataGridView1._parent = nn
+                nn.LoadProfileDefinition(nn._ProfileFile)
 
-            nn.Show()
+                nn.Show()
 
-            nn.BindingSource1.DataSource = DataSetX.CopyToDataTable
-            nn.FilterExtendedDataGridView1.DataGridViewCtl.DataSource = nn.BindingSource1
+                nn.BindingSource1.DataSource = newdatatable
+                nn.FilterExtendedDataGridView1.DataGridViewCtl.DataSource = nn.BindingSource1
+                nn.FilterExtendedDataGridView1.CheckForBindingAndPopulateCache()
 
-            'nn.PreSetViewSettings(nn.FilterExtendedDataGridView1.DataGridViewCtl, nn._ProfileDefinition)
-            nn.FilterExtendedDataGridView1.CheckForBindingAndPopulateCache()
+                nn.BindingSource1.ResumeBinding()
 
-            nn.BindingSource1.ResumeBinding()
+                Return True
+            Else
+                Return False
+            End If
 
-            Return True
+            Return False
         Catch ex As Exception
             Return False
         End Try
