@@ -3,6 +3,7 @@
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 Imports System.Collections.Specialized
+Imports System.IO
 Imports ColumnFileViewImportFileHandler
 Imports DataGridViewAutoFilter
 
@@ -97,7 +98,15 @@ Public Class ExFilterComboBox
                 Dim hh As DataGridViewAutoFilterColumnHeaderCell
                 hh = _parentCtl.DataGridViewCtl.Columns(_parentColumnIndex).HeaderCell
 
-                My.Computer.FileSystem.WriteAllText(SaveFilterListToFile.FileName, String.Join(vbNewLine, hh.FilterValuesToArray), False)
+                Dim savelist As Array
+                savelist = hh.FilterValuesToArray
+
+                Dim writerc As New StreamWriter(SaveFilterListToFile.FileName)
+                For ind = 0 To savelist.Length - 1
+                    writerc.WriteLine(savelist(ind))
+                Next
+
+                writerc.Close()
             Else
                 'DODO: Create unique list an then save it to file
             End If
