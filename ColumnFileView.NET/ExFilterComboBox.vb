@@ -51,9 +51,12 @@ Public Class ExFilterComboBox
             If kk.filtered Then
                 If Not ItemCtl.Items.Contains(kk.selectedFilterValue) Then
                     ItemCtl.Items.Add(kk.selectedFilterValue)
+                    ItemCtl.SelectedItem = kk.selectedFilterValue
+                Else
+                    Dim ind As Integer
+                    ind = ItemCtl.Items.IndexOf(kk.selectedFilterValue)
+                    ItemCtl.SelectedIndex = ind
                 End If
-
-                ItemCtl.SelectedItem = kk.selectedFilterValue
             End If
         End If
 
@@ -126,6 +129,7 @@ Public Class ExFilterComboBox
             End If
 
             _parentCtl._UnsavedProfileChanges = True
+            _parentCtl.UpdateFilterControls()
         End If
     End Sub
 End Class

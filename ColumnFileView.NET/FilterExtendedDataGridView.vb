@@ -78,11 +78,15 @@ Public Class FilterExtendedDataGridView
                 Dim uu As New ExFilterComboBox
                 uu._parentCtl = Me
                 uu._parentColumnIndex = ind
-                If _parent._ProfileDefinition.UseExtendedFilter Then
+                If _parent._ProfileDefinition.UseExtendedFilter Or _parent._Settings.AlwaysUseExtendedFilters Then
                     uu._FilterMode = 1
                 End If
                 If Not _ProfileDefinition.ColumnDefinitions(ind).CommonFilters.Length = 0 Then
-                    For ind2 = 0 To _ProfileDefinition.ColumnDefinitions(ind).CommonFilters.Length - 1
+                    Dim startind As Integer = 0
+                    If _ProfileDefinition.ColumnDefinitions(ind).CommonFilters(0) = "(All)" Then
+                        startind = 1
+                    End If
+                    For ind2 = startind To _ProfileDefinition.ColumnDefinitions(ind).CommonFilters.Length - 1
                         uu.ItemCtl.Items.Add(_ProfileDefinition.ColumnDefinitions(ind).CommonFilters(ind2))
                     Next
                 End If
