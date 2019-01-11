@@ -321,7 +321,7 @@ Public Class Form1
                     SearchText = SearchText.Replace("[", "'['")
                     SearchText = SearchText.Replace("]", "']'")
                 End If
-                If SkipEscapingChars = False Then
+                If SkipEscapingPercentChars = False Then
                     SearchText = SearchText.Replace("%", "'%'")
                 End If
                 SearchText = SearchText.Replace("*", "[*]")
@@ -354,7 +354,7 @@ Public Class Form1
             If ToolStripButton7.Checked Then
                 result = CreateNewInstance(SearchQuery(GetSQLWhereClause(ToolStripTextBox1.Text, " = ", ToolStripComboBox1.SelectedIndex, False, False, True), BindingSource1.DataSource))
             Else
-                result = CreateNewInstance(SearchQuery(GetSQLWhereClause("%" & ToolStripTextBox1.Text & "%", " LIKE ", ToolStripComboBox1.SelectedIndex, False, False, False), BindingSource1.DataSource))
+                result = CreateNewInstance(SearchQuery(GetSQLWhereClause("%" & ToolStripTextBox1.Text & "%", " LIKE ", ToolStripComboBox1.SelectedIndex, False, True, False), BindingSource1.DataSource))
             End If
             If Not result Then
                 MsgBox("Es konnte nicht nach dem Eintrag gesucht werden.")
