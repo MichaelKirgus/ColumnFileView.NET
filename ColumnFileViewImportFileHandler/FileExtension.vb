@@ -5,4 +5,5 @@
 <Serializable> Public Class FileExtension
     Public Property DisplayName As String = ""
     Public Property Extension As String = ""
+    Public Property CancelRecognition As Boolean = False
 End Class

@@ -29,6 +29,9 @@ Public Class FileRecognitionHandler
                         For ruleindex1 = 0 To ProfileCollection(index).FileExtensionRecognitionRules.Count - 1
                             If ProfileCollection(index).FileExtensionRecognitionRules(ruleindex1).Extension.ToLower = zz.Extension.ToLower Then
                                 resultindex = index
+                                If ProfileCollection(index).FileExtensionRecognitionRules(ruleindex1).CancelRecognition Then
+                                    Return resultindex
+                                End If
                             End If
                         Next
                     End If
@@ -47,10 +50,16 @@ Public Class FileRecognitionHandler
                             If ProfileCollection(index).FilenameRecognitionRules(ruleindex3).DirectMatching Then
                                 If text = filenamex Then
                                     resultindex = index
+                                    If ProfileCollection(index).FilenameRecognitionRules(ruleindex3).CancelRecognition Then
+                                        Return resultindex
+                                    End If
                                 End If
                             Else
                                 If filenamex.Contains(text) Then
                                     resultindex = index
+                                    If ProfileCollection(index).FilenameRecognitionRules(ruleindex3).CancelRecognition Then
+                                        Return resultindex
+                                    End If
                                 End If
                             End If
                         Next
@@ -61,6 +70,9 @@ Public Class FileRecognitionHandler
                             If First10Lines.Count > ProfileCollection(index).FileContentRecognitionRules(ruleindex2).LineCount Then
                                 If First10Lines(ProfileCollection(index).FileContentRecognitionRules(ruleindex2).LineCount).Contains(ProfileCollection(index).FileContentRecognitionRules(ruleindex2).ContainsText) Then
                                     resultindex = index
+                                    If ProfileCollection(index).FileContentRecognitionRules(ruleindex2).CancelRecognition Then
+                                        Return resultindex
+                                    End If
                                 End If
                             End If
                         Next

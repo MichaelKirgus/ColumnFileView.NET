@@ -6,4 +6,5 @@
     Public Property DisplayName As String = ""
     Public Property LineCount As Int64 = 0
     Public Property ContainsText As String = ""
+    Public Property CancelRecognition As Boolean = False
 End Class

@@ -7,4 +7,5 @@
     Public Property Text As String = ""
     Public Property CaseSensitive As Boolean = False
     Public Property DirectMatching As Boolean = False
+    Public Property CancelRecognition As Boolean = False
 End Class

@@ -11,6 +11,7 @@
     Public Property AutoGenerateColumns As Boolean = False
     Public Property FirstRowColumns As Boolean = False
     Public Property SkipFirstRowAsContent As Boolean = False
+    Public Property SkipNFirstLines As Integer = 0
     Public Property UseExtendedFilter As Boolean = False
     Public Property FileExtensionRecognitionRules As New List(Of FileExtension)
     Public Property FilenameRecognitionRules As New List(Of FileNameRecognition)
