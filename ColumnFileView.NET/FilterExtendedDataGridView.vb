@@ -104,13 +104,9 @@ Public Class FilterExtendedDataGridView
 
         Dim cnt As Integer = 0
         For ind = 0 To FilterPanel.Controls.Count - 1
-            Try
-                Dim uu As ExFilterComboBox
-                uu = FilterPanel.Controls(ind)
-
+            If FilterPanel.Controls(ind).GetType() Is GetType(ExFilterComboBox) Then
                 cnt += 1
-            Catch ex As Exception
-            End Try
+            End If
         Next
 
         Return cnt
