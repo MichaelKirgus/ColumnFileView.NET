@@ -172,6 +172,12 @@
     <Compile Include="ProcessingCtl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ProfileEditorFrm.Designer.vb">
+      <DependentUpon>ProfileEditorFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileEditorFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SettingsFrm.Designer.vb">
       <DependentUpon>SettingsFrm.vb</DependentUpon>
     </Compile>
@@ -228,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProcessingCtl.resx">
       <DependentUpon>ProcessingCtl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileEditorFrm.resx">
+      <DependentUpon>ProfileEditorFrm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsFrm.resx">
       <DependentUpon>SettingsFrm.vb</DependentUpon>
