@@ -16,7 +16,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Textdateien formatiert in Spalten darstellen")>
 <Assembly: AssemblyCompany("Michael Kirgus")>
 <Assembly: AssemblyProduct("ColumnFileView.NET")>
-<Assembly: AssemblyCopyright("Copyright ©  2018 Michael Kirgus")>
+<Assembly: AssemblyCopyright("Copyright ©  2018-2019 Michael Kirgus")>
 <Assembly: AssemblyTrademark("ColumnFileView.NET")>
 
 <Assembly: ComVisible(False)>
@@ -35,5 +35,5 @@ Imports System.Runtime.InteropServices
 ' übernehmen, indem Sie "*" eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.1.0.0")>
-<Assembly: AssemblyFileVersion("1.1.0.0")>
+<Assembly: AssemblyVersion("0.1.0.0")>
+<Assembly: AssemblyFileVersion("0.1.0.0")>

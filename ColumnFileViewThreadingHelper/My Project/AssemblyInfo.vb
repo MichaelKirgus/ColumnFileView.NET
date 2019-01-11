@@ -12,17 +12,17 @@ Imports System.Runtime.InteropServices
 
 ' Werte der Assemblyattribute überprüfen
 
-<Assembly: AssemblyTitle("ColumnFileViewThreadingHelper")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("ColumnFileViewThreadingHelper")> 
-<Assembly: AssemblyCopyright("Copyright ©  2018")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTitle("ColumnFileViewThreadingHelper")>
+<Assembly: AssemblyDescription("Multi-Threaded library to transform files")>
+<Assembly: AssemblyCompany("Michael Kirgus")>
+<Assembly: AssemblyProduct("ColumnFileViewThreadingHelper")>
+<Assembly: AssemblyCopyright("Copyright ©  2018-2019 Michael Kirgus")>
+<Assembly: AssemblyTrademark("Michael Kirgus")>
 
 <Assembly: ComVisible(False)>
 
 'Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird.
-<Assembly: Guid("b3bcdc4e-f4d7-45aa-a8cd-e4750cdc84c5")> 
+<Assembly: Guid("b3bcdc4e-f4d7-45aa-a8cd-e4750cdc84c5")>
 
 ' Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 '
@@ -35,5 +35,5 @@ Imports System.Runtime.InteropServices
 ' übernehmen, indem Sie "*" eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("0.1.0.0")>
+<Assembly: AssemblyFileVersion("0.1.0.0")>

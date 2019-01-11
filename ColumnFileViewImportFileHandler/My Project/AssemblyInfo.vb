@@ -12,12 +12,12 @@ Imports System.Runtime.InteropServices
 
 ' Werte der Assemblyattribute überprüfen
 
-<Assembly: AssemblyTitle("ColumnFileViewImportFileHandler")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("ColumnFileViewImportFileHandler")> 
-<Assembly: AssemblyCopyright("Copyright ©  2018")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTitle("ColumnFileViewImportFileHandler")>
+<Assembly: AssemblyDescription("Import/transform library")>
+<Assembly: AssemblyCompany("Michael Kirgus")>
+<Assembly: AssemblyProduct("ColumnFileViewImportFileHandler")>
+<Assembly: AssemblyCopyright("Copyright ©  2018-2019 Michael Kirgus")>
+<Assembly: AssemblyTrademark("Michael Kirgus")>
 
 <Assembly: ComVisible(False)>
 
