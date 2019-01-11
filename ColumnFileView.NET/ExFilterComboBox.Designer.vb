@@ -33,6 +33,10 @@ Partial Class ExFilterComboBox
         Me.DefinitionBearbeitenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ExportiereFilterlisteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveFilterListToFile = New System.Windows.Forms.SaveFileDialog()
+        Me.ÜbernehmeFilterlisteInBenutzerdefinierteFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -49,14 +53,14 @@ Partial Class ExFilterComboBox
         Me.ItemCtl.Items.AddRange(New Object() {"(All)"})
         Me.ItemCtl.Location = New System.Drawing.Point(0, 0)
         Me.ItemCtl.Name = "ItemCtl"
-        Me.ItemCtl.Size = New System.Drawing.Size(130, 21)
+        Me.ItemCtl.Size = New System.Drawing.Size(109, 21)
         Me.ItemCtl.TabIndex = 0
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetzteAktuelleSpaltenbreiteAlsStandardImProfilToolStripMenuItem, Me.DefinitionBearbeitenToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetzteAktuelleSpaltenbreiteAlsStandardImProfilToolStripMenuItem, Me.ÜbernehmeFilterlisteInBenutzerdefinierteFilterToolStripMenuItem, Me.DefinitionBearbeitenToolStripMenuItem, Me.ToolStripSeparator1, Me.ExportiereFilterlisteToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(333, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(333, 98)
         '
         'SetzteAktuelleSpaltenbreiteAlsStandardImProfilToolStripMenuItem
         '
@@ -88,8 +92,8 @@ Partial Class ExFilterComboBox
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.Button1)
         Me.SplitContainer1.Panel2MinSize = 20
-        Me.SplitContainer1.Size = New System.Drawing.Size(153, 21)
-        Me.SplitContainer1.SplitterDistance = 130
+        Me.SplitContainer1.Size = New System.Drawing.Size(135, 21)
+        Me.SplitContainer1.SplitterDistance = 109
         Me.SplitContainer1.SplitterWidth = 1
         Me.SplitContainer1.TabIndex = 1
         '
@@ -100,9 +104,33 @@ Partial Class ExFilterComboBox
         Me.Button1.Location = New System.Drawing.Point(0, 0)
         Me.Button1.Margin = New System.Windows.Forms.Padding(0)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(22, 21)
+        Me.Button1.Size = New System.Drawing.Size(25, 21)
         Me.Button1.TabIndex = 0
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(329, 6)
+        '
+        'ExportiereFilterlisteToolStripMenuItem
+        '
+        Me.ExportiereFilterlisteToolStripMenuItem.Name = "ExportiereFilterlisteToolStripMenuItem"
+        Me.ExportiereFilterlisteToolStripMenuItem.Size = New System.Drawing.Size(332, 22)
+        Me.ExportiereFilterlisteToolStripMenuItem.Text = "Exportiere Filterliste..."
+        '
+        'SaveFilterListToFile
+        '
+        Me.SaveFilterListToFile.DefaultExt = "txt"
+        Me.SaveFilterListToFile.Filter = "Textdatei|*.txt"
+        Me.SaveFilterListToFile.RestoreDirectory = True
+        Me.SaveFilterListToFile.SupportMultiDottedExtensions = True
+        '
+        'ÜbernehmeFilterlisteInBenutzerdefinierteFilterToolStripMenuItem
+        '
+        Me.ÜbernehmeFilterlisteInBenutzerdefinierteFilterToolStripMenuItem.Name = "ÜbernehmeFilterlisteInBenutzerdefinierteFilterToolStripMenuItem"
+        Me.ÜbernehmeFilterlisteInBenutzerdefinierteFilterToolStripMenuItem.Size = New System.Drawing.Size(332, 22)
+        Me.ÜbernehmeFilterlisteInBenutzerdefinierteFilterToolStripMenuItem.Text = "Übernehme Filterliste in benutzerdefinierte Filter"
         '
         'ExFilterComboBox
         '
@@ -113,7 +141,7 @@ Partial Class ExFilterComboBox
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ExFilterComboBox"
         Me.Padding = New System.Windows.Forms.Padding(1, 0, 0, 0)
-        Me.Size = New System.Drawing.Size(154, 21)
+        Me.Size = New System.Drawing.Size(136, 21)
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -129,4 +157,8 @@ Partial Class ExFilterComboBox
     Friend WithEvents DefinitionBearbeitenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents Button1 As Button
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ExportiereFilterlisteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SaveFilterListToFile As SaveFileDialog
+    Friend WithEvents ÜbernehmeFilterlisteInBenutzerdefinierteFilterToolStripMenuItem As ToolStripMenuItem
 End Class

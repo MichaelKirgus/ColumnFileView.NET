@@ -2,6 +2,7 @@
 'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
+Imports System.Collections.Specialized
 Imports ColumnFileViewImportFileHandler
 Imports DataGridViewAutoFilter
 
@@ -81,5 +82,50 @@ Public Class ExFilterComboBox
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ContextMenuStrip1.Show(MousePosition.X, MousePosition.Y)
+    End Sub
+
+    Private Sub ExportiereFilterlisteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportiereFilterlisteToolStripMenuItem.Click
+        SaveFilterListToFile.ShowDialog()
+    End Sub
+
+    Private Sub SaveFilterListToFile_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles SaveFilterListToFile.FileOk
+        Try
+            If _FilterMode = 1 Then
+                Dim hh As DataGridViewAutoFilterColumnHeaderCell
+                hh = _parentCtl.DataGridViewCtl.Columns(_parentColumnIndex).HeaderCell
+
+                My.Computer.FileSystem.WriteAllText(SaveFilterListToFile.FileName, String.Join(vbNewLine, hh.FilterValuesToArray), False)
+            Else
+                'DODO: Create unique list an then save it to file
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub ÜbernehmeFilterlisteInBenutzerdefinierteFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ÜbernehmeFilterlisteInBenutzerdefinierteFilterToolStripMenuItem.Click
+        Dim handl As FileHandler
+        handl = _parentCtl._ProfileDefinition
+        Dim oo As MsgBoxResult = MsgBoxResult.Yes
+
+        If _FilterMode = 1 Then
+            If Not handl.ColumnDefinitions(_parentColumnIndex).CommonFilters.Count = 0 Then
+                oo = MsgBox("Es sind bereits Elemente in der Filterliste vorhanden. Sollen diese überschrieben (Ja) oder zusammengeführt (Nein) werden?", MsgBoxStyle.YesNoCancel)
+                If oo = MsgBoxResult.Cancel Then
+                    Return
+                End If
+            End If
+
+            Dim hh As DataGridViewAutoFilterColumnHeaderCell
+            hh = _parentCtl.DataGridViewCtl.Columns(_parentColumnIndex).HeaderCell
+
+            If oo = MsgBoxResult.Yes Then
+                handl.ColumnDefinitions(_parentColumnIndex).CommonFilters = hh.FilterValuesToArray
+            End If
+            If oo = MsgBoxResult.No Then
+                handl.ColumnDefinitions(_parentColumnIndex).CommonFilters.Union(hh.FilterValuesToArray).ToArray
+            End If
+
+            _parentCtl._UnsavedProfileChanges = True
+        End If
     End Sub
 End Class

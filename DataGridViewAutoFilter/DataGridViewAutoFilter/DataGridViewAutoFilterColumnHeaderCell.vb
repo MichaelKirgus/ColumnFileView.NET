@@ -101,6 +101,19 @@ Public Class DataGridViewAutoFilterColumnHeaderCell
         End If
     End Sub
 
+    Public Function FilterValuesToArray() As Array
+        'This function exports the filter list to an array.
+
+        Try
+            Dim filterArray As String() = New String(filters.Count - 1) {}
+            filters.Keys.CopyTo(filterArray, 0)
+
+            Return filterArray
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     ''' <summary>
     ''' Initializes a new instance of the DataGridViewColumnHeaderCell 
     ''' class. 
