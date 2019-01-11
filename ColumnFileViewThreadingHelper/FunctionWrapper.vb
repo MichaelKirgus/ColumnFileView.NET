@@ -93,6 +93,16 @@ Public Class FunctionWrapper
                     TManager.ProfileHandler = oo
                 End If
 
+                'Check if we have to ignore lines at the start of file
+                If TManager.ProfileHandler.SkipFirstRowAsContent Then
+                    'Set start index +1
+                    TManager.StartAt += 1
+                End If
+                If Not TManager.ProfileHandler.SkipNFirstLines = 0 Then
+                    'Set start index +int
+                    TManager.StartAt += TManager.ProfileHandler.SkipNFirstLines
+                End If
+
                 If (Filenames.Count > 1) Or (Not TargetFolder = "") Then
                     'Es wurden mehrere Dateien übergeben:
 

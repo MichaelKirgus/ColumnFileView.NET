@@ -87,30 +87,38 @@ Public Class PostProcessingHandler
 
                     Case ProcessingItem.ProcessingTypeEnum.RexExExpressionEqualsInColumn
                         If PostProcessingItems(postindex).RegExEqualIndex = -1 Then
+                            Dim delcnt As Integer = 0
                             For rowindex = 0 To DataX.Tables(0).Rows.Count - 1
                                 For colindex = 0 To colcnt - 1
                                     Dim newstr As String
-                                    If Not DataX.Tables(0).Rows(rowindex).IsNull(colindex) Then
-                                        newstr = DataX.Tables(0).Rows(rowindex).Item(colindex)
+                                    If Not DataX.Tables(0).Rows(rowindex - delcnt).IsNull(colindex) Then
+                                        newstr = DataX.Tables(0).Rows(rowindex - delcnt).Item(colindex)
                                         Dim oo As New Regex(PostProcessingItems(postindex).RegExPattern)
                                         If Not oo.IsMatch(newstr) Then
-                                            DataX.Tables(0).Rows.Remove(DataX.Tables(0).Rows(rowindex))
+                                            DataX.Tables(0).Rows.Remove(DataX.Tables(0).Rows(rowindex - delcnt))
+                                            delcnt += 1
                                         End If
                                     End If
                                 Next
                                 CurrentLine += 1
                             Next
                         Else
-                            For colindex = 0 To colcnt - 1
+                            Dim delcnt As Integer = 0
+                            For rowindex = 0 To DataX.Tables(0).Rows.Count - 1
                                 Dim newstr As String
-                                If Not DataX.Tables(0).Rows(PostProcessingItems(postindex).RegExEqualIndex).IsNull(colindex) Then
-                                    newstr = DataX.Tables(0).Rows(PostProcessingItems(postindex).RegExEqualIndex).Item(colindex)
-                                    Dim oo As New Regex(PostProcessingItems(postindex).RegExPattern)
-                                    If Not oo.IsMatch(newstr) Then
-                                        DataX.Tables(0).Rows.Remove(DataX.Tables(0).Rows(PostProcessingItems(postindex).RegExEqualIndex))
+                                If Not DataX.Tables(0).Rows(rowindex - delcnt).ItemArray.Length < PostProcessingItems(postindex).RegExEqualIndex Then
+                                    If Not DataX.Tables(0).Rows(rowindex - delcnt).IsNull(PostProcessingItems(postindex).RegExEqualIndex) Then
+                                        newstr = DataX.Tables(0).Rows(rowindex - delcnt).Item(PostProcessingItems(postindex).RegExEqualIndex)
+                                        Dim oo As New Regex(PostProcessingItems(postindex).RegExPattern)
+                                        If Not oo.IsMatch(newstr) Then
+                                            DataX.Tables(0).Rows.Remove(DataX.Tables(0).Rows(rowindex - delcnt))
+                                            delcnt += 1
+                                        End If
                                     End If
                                 End If
+                                CurrentLine += 1
                             Next
+
                             CurrentLine += 1
                         End If
                 End Select
