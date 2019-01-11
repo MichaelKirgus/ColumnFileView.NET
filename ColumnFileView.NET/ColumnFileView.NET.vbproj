@@ -243,6 +243,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="License\GNU_v3.rtf" />
+    <None Include="License\OpenIconLibrary_0.11\LICENSES" />
+    <None Include="License\OpenIconLibrary_0.11\README" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -326,8 +329,11 @@
     <None Include="Resources\mail-mark-important-2.png" />
     <None Include="Resources\configure-toolbars.png" />
     <None Include="Resources\configure-5.png" />
+    <Content Include="License\OpenIconLibrary_0.11\LICENSES_full_documentation.txt" />
+    <Content Include="License\OpenIconLibrary_0.11\OpenIconLibraryLicense.txt" />
     <Content Include="view-file-columns.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
