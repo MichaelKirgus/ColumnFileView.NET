@@ -35,6 +35,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ColumnFileViewCliHelper", "
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ColumnFileViewWinCli", "ColumnFileViewWinCli\ColumnFileViewWinCli.vbproj", "{9B5DDE29-2EED-4E62-9B82-0C04C1C30085}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EA571F4E-46FB-4B2E-B06E-92833FD29BEC}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
