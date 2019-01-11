@@ -7,3 +7,4 @@ It also supports "load N last lines of file" and it uses by default all cpu thre
 You can use an command-line interface (.net framework cli app OR .net core 2.2 cli) to transform files an to save them into a CSV or XML.
 
 Feel free to download and test it: https://github.com/MichaelKirgus/ColumnFileView.NET/tree/master/ColumnFileView.NET/Builds
+(Currently the GUI is only available in German)
